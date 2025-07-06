@@ -120,7 +120,7 @@ app.post('/answer/:id', verifyToken, async (req, res) => {
     }
 
 })
-app.get('/leaderboard', async (req, res) => {
+app.get('/leaderboard',cors(corsOptions), async (req, res) => {
     try {
         const connect = await connection();
         const db = connect.db('Quiz');
