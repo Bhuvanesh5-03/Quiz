@@ -8,7 +8,15 @@ import cors from 'cors'
 import { ObjectId } from 'mongodb';
 dotenv.config()
 const app = express();
-app.use(cors())
+const corsOptions = {
+    origin: 'https://quiz-website-5f105.web.app',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 app.post('/Signup', async (req, res) => {
     try {
@@ -129,18 +137,18 @@ app.post('/QuestionEnter/:Name', async (req, res) => {
     const question = req.body
     try {
         if (name === "Bhuvanesh") {
-            const connect=await connection();
-            const db= connect.db('Quiz')
-            const coll=await db.collection('Questions').insertOne(question);
-            if(coll.acknowledged){
-                res.send({message:"Inserted Successfully",success:true})
+            const connect = await connection();
+            const db = connect.db('Quiz')
+            const coll = await db.collection('Questions').insertOne(question);
+            if (coll.acknowledged) {
+                res.send({ message: "Inserted Successfully", success: true })
             }
-            else{
-                res.status(400).send({message:"Unsuccessfull",success:false});
+            else {
+                res.status(400).send({ message: "Unsuccessfull", success: false });
             }
         }
         else {
-            res.status(400).send({message:"Invalid Page",success:false});
+            res.status(400).send({ message: "Invalid Page", success: false });
         }
     } catch (err) {
         res.status(500).send({ message: "Error" })
