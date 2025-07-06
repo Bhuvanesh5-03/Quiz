@@ -18,6 +18,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
 app.post('/Signup', async (req, res) => {
     try {
         const data = req.body;
