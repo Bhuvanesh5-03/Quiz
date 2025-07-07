@@ -18,9 +18,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(express.json());
-app.post('/', verifyToken,(req,res)=>{
-    res.send({success:true})
-});
 app.post('/Signup', async (req, res) => {
     try {
         const data = req.body;
