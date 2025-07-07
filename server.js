@@ -157,4 +157,5 @@ app.post('/QuestionEnter/:Name', async (req, res) => {
         res.status(500).send({ message: "Error" })
     }
 })
-app.listen(8000);
+const port=process.env.PORT || 8000
+app.listen(port);
